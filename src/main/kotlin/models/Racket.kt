@@ -16,9 +16,9 @@ import java.time.LocalDateTime
 @Serializable
 data class Racket(
     @Transient val id: Long = NEW_RACKET,
-    val brand: String?,
-    val model: String?,
-    val price: Double?,
+    val brand: String,
+    val model: String,
+    val price: Double,
     val numberTennisPlayers: Int? = 0,
     val image: String = DEFAULT_IMAGE,
     @Serializable(with = LocalDateSerializer::class)

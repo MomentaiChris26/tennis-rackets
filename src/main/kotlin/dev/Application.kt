@@ -2,6 +2,8 @@ package dev
 
 import dev.plugins.configureRouting
 import dev.plugins.configureSerialization
+import dev.plugins.configureStatusPages
+import dev.plugins.configureValidation
 import io.ktor.server.application.*
 
 /*
@@ -15,4 +17,6 @@ fun main(args: Array<String>) {
 fun Application.module() {
     configureSerialization()
     configureRouting()
+    configureValidation()
+    configureStatusPages()
 }

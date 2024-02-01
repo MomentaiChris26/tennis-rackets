@@ -1,12 +1,13 @@
 package routes
 
+import dto.RacketRequest
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import models.Racket
+import mapping.toModel
 import repositories.RacketRepository
 
 private const val ENDPOINT = "api/rackets"
@@ -52,7 +53,7 @@ fun Application.racketRoutes() {
         }
 
         post("/$ENDPOINT") {
-            val racket = call.receive<Racket>()
+            val racket = call.receive<RacketRequest>().toModel()
             logger.debug { "save: $racket" }
             val newRacket = rackets.save(racket)
             call.respond(HttpStatusCode.Created,newRacket)
@@ -70,7 +71,7 @@ fun Application.racketRoutes() {
                 }
 
                 try {
-                    val racket = call.receive<Racket>()
+                    val racket = call.receive<RacketRequest>().toModel()
                     val newRacket = rackets.save(racket.copy(id = id))
                     call.respond(HttpStatusCode.OK, newRacket)
                 } catch (e: Exception) {
