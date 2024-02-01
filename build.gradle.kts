@@ -32,6 +32,8 @@ dependencies {
     implementation("io.github.oshai:kotlin-logging-jvm:5.1.0")
     implementation("io.ktor:ktor-server-request-validation:$ktor_version")
     implementation("io.ktor:ktor-server-status-pages:$ktor_version")
+    implementation("org.ufoss.kotysa:kotysa-r2dbc:3.2.1")
+    implementation("org.postgresql:r2dbc-postgresql:1.0.4.RELEASE")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

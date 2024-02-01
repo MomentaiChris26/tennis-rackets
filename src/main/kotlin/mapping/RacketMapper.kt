@@ -1,7 +1,6 @@
 package mapping
 
-import dto.RacketRequest
-import dto.RacketResponse
+import entities.RacketEntity
 import models.Racket
 
 /**
@@ -10,7 +9,7 @@ import models.Racket
  * In Kotlin we can use extension functions
  */
 
-fun RacketRequest.toModel() = Racket(
+fun RacketEntity.toModel() = Racket(
     brand = this.brand,
     model = this.model,
     price = this.price,
@@ -18,16 +17,16 @@ fun RacketRequest.toModel() = Racket(
     image = this.image
 )
 
-fun Racket.toResponse() = RacketResponse(
-    id = this.id,
-    brand = this.brand!!,
-    model = this.model!!,
-    price = this.price!!,
-    numberTennisPlayers = this.numberTennisPlayers!!,
+fun List<RacketEntity>.toModel() = this.map { it.toModel() }
+
+fun Racket.toEntity() = RacketEntity(
+    id = if (this.id == Racket.NEW_RACKET) null else this.id,
+    brand = this.brand,
+    model = this.model,
+    price = this.price,
+    numberTennisPlayers = this.numberTennisPlayers,
     image = this.image,
     createdAt = this.createdAt,
-    updatedAt = this.updatedAt.toString(),
+    updatedAt = this.updatedAt,
     isDeleted = this.isDeleted
 )
-
-fun List<Racket>.toResponse() = this.map { it.toResponse() }

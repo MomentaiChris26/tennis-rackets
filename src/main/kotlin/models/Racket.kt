@@ -19,7 +19,7 @@ data class Racket(
     val brand: String,
     val model: String,
     val price: Double,
-    val numberTennisPlayers: Int? = 0,
+    val numberTennisPlayers: Int = 0,
     val image: String = DEFAULT_IMAGE,
     @Serializable(with = LocalDateSerializer::class)
     val createdAt: LocalDateTime = LocalDateTime.now(),
