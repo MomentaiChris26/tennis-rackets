@@ -83,18 +83,17 @@ fun Application.racketRoutes() {
         }
 
         delete("/$ENDPOINT/{id}") {
-            val id = call.parameters["id"]?.toLongOrNull()
-            logger.debug { "delete: $id" }
-            if (id == null) {
+            call.parameters["id"]?.toLong()?.let { id ->
+                logger.debug { "delete: $id" }
+                val isDeleted = rackets.delete(id)
+                if (!isDeleted) {
+                    call.respond(HttpStatusCode.NotFound)
+                    return@delete
+                }
+                call.respond(HttpStatusCode.OK)
+            } ?: run {
                 call.respond(HttpStatusCode.BadRequest)
-                return@delete
             }
-            val isDeleted = rackets.delete(id)
-            if (!isDeleted) {
-                call.respond(HttpStatusCode.NotFound)
-                return@delete
-            }
-            call.respond(HttpStatusCode.OK)
         }
     }
 }
